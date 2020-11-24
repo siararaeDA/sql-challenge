@@ -12,18 +12,18 @@ WHERE   hire_date BETWEEN '1986-01-01' AND '1986-12-31';
 SELECT  dm.dept_no, d.dept_name, dm.emp_no, e.last_name, e.first_name
 FROM    dept_manager dm
         JOIN employees e ON dm.emp_no = e.emp_no
-        JOIN departments d ON dm.dept_no = d.dept_no
+        JOIN departments d ON dm.dept_no = d.dept_no;
 
 -- List the department of each employee with the following information: employee number, last name, first name, and department name.
 SELECT  e.emp_no, e.last_name, e.first_name, d.dept_name
 FROM    dept_emp de
         JOIN employees e ON e.emp_no = de.emp_no
-        JOIN departments d ON d.dept_no = de.dept_no
+        JOIN departments d ON d.dept_no = de.dept_no;
 
 -- List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
 SELECT  first_name, last_name, sex
 FROM    employees
-WHERE   first_name = 'Hercules' AND last_name LIKE 'B%'
+WHERE   first_name = 'Hercules' AND last_name LIKE 'B%';
 
 -- List all employees in the Sales department, including their employee number, last name, first name, and department name.
 WITH dept_cte AS (
@@ -59,3 +59,7 @@ FROM    employees e
 
 -- In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
 
+SELECT  last_name, COUNT(last_name) AS frequency
+FROM    employees
+GROUP BY	last_name
+ORDER BY	frequency DESC;
