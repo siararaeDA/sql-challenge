@@ -27,36 +27,33 @@ CREATE TABLE employees (
 
 -- Create salaries table
 CREATE TABLE salaries (
-    id SERIAL,
-    email VARCHAR(30) NOT NULL,
-    customer_id INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES customer(id)
+    emp_no INT NOT NULL,
+    salary INT NOT NULL,
+    PRIMARY KEY (emp_no),
+    FOREIGN KEY (emp_no) REFERENCES employees(emp_no)
 );
 
 -- Create departments table
 CREATE TABLE deptartments (
-    id SERIAL,
-    email VARCHAR(30) NOT NULL,
-    customer_id INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES customer(id)
+    dept_no VARCHAR(10) NOT NULL,
+    dept_name VARCHAR(50) NOT NULL,
+    PRIMARY KEY (dept_no)
 );
 
 -- Create department manager table
 CREATE TABLE dept_manager (
-    id SERIAL,
-    email VARCHAR(30) NOT NULL,
-    customer_id INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES customer(id)
+    dept_no INT NOT NULL,
+    emp_no INT NOT NULL,
+    PRIMARY KEY (dept_no,emp_no),
+    FOREIGN KEY (dept_no) REFERENCES departments.dept_no,
+    FOREIGN KEY (emp_no) REFERENCES employees.emp_no
 );
 
 -- Create department employee table
 CREATE TABLE dept_emp (
-    id SERIAL,
-    email VARCHAR(30) NOT NULL,
-    customer_id INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES customer(id)
+    emp_no INT NOT NULL,
+    dept_no INT NOT NULL,
+    PRIMARY KEY (emp_no,dept_no),
+    FOREIGN KEY (emp_no) REFERENCES employees.emp_no,
+    FOREIGN KEY (dept_no) REFERENCES departments.dept_no
 );
